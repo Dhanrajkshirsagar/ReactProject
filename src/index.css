@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.Card{
+  text-align: center;
+  text-shadow: black;
+}
+.flex-container{
+  text-align:left;
+}
+.selectpicker{
+  box-sizing: border-box;
+  width: "15px";
+}
+.Loader{
+  text-align: center;
+}

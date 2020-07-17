@@ -1,5 +1,5 @@
 import React from "react";
-import { table, Button } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 
 
 
@@ -9,8 +9,8 @@ class StateSummarryTable extends React.Component {
   
     return (
       <div>
-        <div style={{ margin: "25px" }} class="table" id="stateSummary">
-          <table>
+        <div style={{ margin: "10px" }} class="table" id="stateSummary">
+          <Table className="center">
             <thead>
               <th>Sr.No</th>
               <th>State Name</th>
@@ -33,7 +33,7 @@ class StateSummarryTable extends React.Component {
                 );
               })}
             </tbody>
-          </table>
+          </Table>
         </div>
       </div>
     );

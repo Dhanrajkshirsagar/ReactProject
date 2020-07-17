@@ -1,5 +1,5 @@
 import React from "react";
-import { table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import ReactExport from "react-html-table-to-excel";
 
 
@@ -18,9 +18,9 @@ class GetCovidSummary extends React.Component {
     return (
       <div>
         <div style={{ margin: "5px" }}>
-        <div><ReactExport table="Covid" filename="Covid19 report" sheet="sheet1" ButtonText="Export"/></div>
+        <div><ReactExport table="Covid" style={{margin:"10px"}}filename="Covid19 report" sheet="sheet1" ButtonText="Export"/></div>
         </div>
-        <table style={{ margin: "15px" }} class="table" id="Covid">
+        <Table style={{ margin: "15px" }} class="table" id="Covid">
           <thead class="thead-light">
             <tr>
               <th scope="col">Sr.No</th>
@@ -60,7 +60,7 @@ class GetCovidSummary extends React.Component {
               );
             })}
           </tbody>
-        </table>
+        </Table>
        
       </div>
     );

@@ -1,43 +1,54 @@
 import React from "react";
 import "./App.css";
-import CollapsibleTable from './CollapsibleTable';
+import CollapsibleTable from "./CollapsibleTable";
 import CovidCards from "./CovidCards";
-import DayWiseSummary from './DayWiseSummary'
+import DayWiseSummary from "./DayWiseSummary";
 import { Image, Spinner, Tabs, Tab } from "react-bootstrap";
+import ChartView from "./ChartView";
 
 class App extends React.Component {
-  state = { isLoaded: false, covidData: [],error:null };
+  state = {
+    isLoaded: false,
+    covidData: [],
+    error: null,
+    countryData: {},
+    GobleData: {},
+  };
 
-  
   componentDidMount() {
     fetch("https://api.covid19api.com/summary")
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
         (result) => {
+          const country = [];
+          result.Countries.map((data) => {
+            data.Country === "India" && country.push({ data });
+          });
           this.setState({
             isLoaded: true,
-            covidData: result
+            covidData: result,
+            countryData: country,
+            GobleData: result.Global,
           });
         },
-        
+
         (error) => {
           this.setState({
             isLoaded: true,
-            error
+            error,
           });
         }
-      )
+      );
   }
   render() {
-    const { error,isLoaded, covidData } = this.state;
-    if(error){
-      return(
-        <div>Error : API Getting failed </div>
-      )
-    }else 
-    if (!isLoaded) {
+    const { error, isLoaded, covidData } = this.state;
+
+    if (error) {
+      return <div>Error : API Getting failed </div>;
+    } else if (!isLoaded) {
       return (
-        <div style={{ margin: "15px", marginLeft: "500px" }}>
+        <div class="Loader">
+          <h2>Loading..</h2>
           <Spinner animation="border" />
         </div>
       );
@@ -51,12 +62,27 @@ class App extends React.Component {
           />
           <h3 style={{ margin: "15px" }}>Covid-19 Dashboard</h3>
           <CovidCards covidData={covidData} />
+          <div>
+            <ChartView
+              covidData={this.state.GobleData}
+              label={"Global Covid Cases"}
+              text={"Global"}
+            />
+          </div>
+          <div>
+            <ChartView
+              covidData={this.state.countryData[0].data}
+              label={"India Covid Cases"}
+              text={"India"}
+            />
+          </div>
+
           <Tabs defaultActiveKey="home" id="home">
             <Tab eventKey="home" title="Home">
               <CollapsibleTable covidData={covidData} />
             </Tab>
             <Tab eventKey="profile" title="Day Wise">
-            <DayWiseSummary/>
+              <DayWiseSummary />
             </Tab>
             <Tab eventKey="contact" title="Contact" disabled></Tab>
           </Tabs>

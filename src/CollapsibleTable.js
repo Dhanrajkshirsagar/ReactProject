@@ -18,9 +18,9 @@ class CollapsibleTable extends React.Component {
   render() {
     const { Loaded, StateData } = this.state;
       return (
-        <div>
+        <div className="Card">
           <Accordion defaultActiveKey="0">
-            <Card>
+            <Card >
               <Accordion.Toggle as={Card.Header} eventKey="0">
                 State Wise Covid-19 Records
               </Accordion.Toggle>
