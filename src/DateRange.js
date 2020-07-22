@@ -9,7 +9,7 @@ class DateRange extends React.Component {
     startDate: "",
   };
   handleChange(value) {
-    
+    console.log(value)
     this.setState({
       endDate: value.selection.endDate,
       startDate: value.selection.startDate,

@@ -3,7 +3,7 @@ import countries from "react-select-country-list";
 import DateRange from "./DateRange";
 import { Table } from "react-bootstrap";
 import moment from "moment";
-
+import DayWiseBarChart from "./DayWiseBarChart";
 
 const options = countries().getData();
 
@@ -20,15 +20,15 @@ class DayWiseSummary extends React.Component {
     fetch("https://api.covid19api.com/dayone/country/" + key)
       .then((res) => res.json())
       .then((result) => {
-          let startOfWeek = moment().startOf("isoWeek").toISOString();
-          let endOfWeek = moment().endOf("isoWeek").toISOString();
-         
-          this.setState({
-            DayWiseData: result,
-            Loaded: true,
-            startDate: startOfWeek,
-            endDate: endOfWeek,
-          });
+        let startOfWeek = moment().startOf("isoWeek").toISOString();
+        let endOfWeek = moment().endOf("isoWeek").toISOString();
+
+        this.setState({
+          DayWiseData: result,
+          Loaded: true,
+          startDate: startOfWeek,
+          endDate: endOfWeek,
+        });
       });
   }
 
@@ -44,16 +44,16 @@ class DayWiseSummary extends React.Component {
 
   render() {
     let { DayWiseData, Loaded } = this.state;
-   
+
     let data = DayWiseData;
-   
+
     let getFilterData = data.filter((filterData) => {
       return (
         filterData.Date >= this.state.startDate &&
-        filterData.Date < this.state.endDate
+        filterData.Date <= this.state.endDate
       );
     });
-
+   
     return (
       <div>
         <div>
@@ -70,10 +70,15 @@ class DayWiseSummary extends React.Component {
               <option>{option.label}</option>
             ))}
           </select>
-         
-          <span>
-            <DateRange getDateOnchange={this.getDateOnchange} startDate={[this.state.startDate,this.state.endDate]} />
-          </span>
+          <div>
+            <span>
+              <DateRange
+                getDateOnchange={this.getDateOnchange}
+                startDate={[this.state.startDate, this.state.endDate]}
+              />
+            </span>
+            <DayWiseBarChart Confirmed={getFilterData.map(data=>{return [data.Confirmed,data.Date]})} />
+          </div>
         </div>
         <div>
           <Table style={{ margin: "25px" }} class="table">

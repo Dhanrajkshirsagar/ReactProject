@@ -6,6 +6,7 @@ import DayWiseSummary from "./DayWiseSummary";
 import { Image, Spinner, Tabs, Tab } from "react-bootstrap";
 import ChartView from "./ChartView";
 
+
 class App extends React.Component {
   state = {
     isLoaded: false,
@@ -63,20 +64,23 @@ class App extends React.Component {
           <h3 style={{ margin: "15px" }}>Covid-19 Dashboard</h3>
           <CovidCards covidData={covidData} />
           <div>
+            <span >
             <ChartView
               covidData={this.state.GobleData}
               label={"Global Covid Cases"}
               text={"Global"}
             />
-          </div>
-          <div>
-            <ChartView
+              </span>
+            <span>
+              <ChartView
               covidData={this.state.countryData[0].data}
               label={"India Covid Cases"}
               text={"India"}
             />
+            </span>
+          
           </div>
-
+        
           <Tabs defaultActiveKey="home" id="home">
             <Tab eventKey="home" title="Home">
               <CollapsibleTable covidData={covidData} />
