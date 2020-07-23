@@ -2,7 +2,6 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import ReactExport from "react-html-table-to-excel";
 
-
 class GetCovidSummary extends React.Component {
   state = { filterStr: "" };
 
@@ -10,7 +9,7 @@ class GetCovidSummary extends React.Component {
     var elements = this.props.covidData.Countries.filter((Countries) => {
       return (
         Countries.Country.toLowerCase().indexOf(
-          this.state.filterStr.toLocaleLowerCase()
+          this.state.filterStr.toLowerCase()
         ) !== -1
       );
     });
@@ -18,7 +17,15 @@ class GetCovidSummary extends React.Component {
     return (
       <div>
         <div style={{ margin: "5px" }}>
-        <div><ReactExport table="Covid" style={{margin:"10px"}}filename="Covid19 report" sheet="sheet1" ButtonText="Export"/></div>
+          <div>
+            <ReactExport
+              table="Covid"
+              style={{ margin: "10px" }}
+              filename="Covid19 report"
+              sheet="sheet1"
+              ButtonText="Export"
+            />
+          </div>
         </div>
         <Table style={{ margin: "15px" }} class="table" id="Covid">
           <thead class="thead-light">
@@ -45,23 +52,26 @@ class GetCovidSummary extends React.Component {
                 ></input>
               </td>
             </tr>
-            {elements.map((countryData, index) => {
-              return (
-                <tr>
-                  <th>{index + 1}</th>
-                  <td>{countryData.Country}</td>
-                  <td>{countryData.NewConfirmed}</td>
-                  <td>{countryData.TotalConfirmed}</td>
-                  <td>{countryData.NewDeaths}</td>
-                  <td>{countryData.TotalDeaths}</td>
-                  <td>{countryData.NewRecovered}</td>
-                  <td>{countryData.TotalRecovered}</td>
-                </tr>
-              );
-            })}
+            {elements.length === 0 ? (
+              <h3>No Data Found</h3>
+            ) : (
+              elements.map((countryData, index) => {
+                return (
+                  <tr>
+                    <th>{index + 1}</th>
+                    <td>{countryData.Country}</td>
+                    <td>{countryData.NewConfirmed}</td>
+                    <td>{countryData.TotalConfirmed}</td>
+                    <td>{countryData.NewDeaths}</td>
+                    <td>{countryData.TotalDeaths}</td>
+                    <td>{countryData.NewRecovered}</td>
+                    <td>{countryData.TotalRecovered}</td>
+                  </tr>
+                );
+              })
+            )}
           </tbody>
         </Table>
-       
       </div>
     );
   }

@@ -16,7 +16,7 @@ class CollapsibleTable extends React.Component {
       );
   }
   render() {
-    const { Loaded, StateData } = this.state;
+    const { StateData } = this.state;
       return (
         <div className="Card">
           <Accordion defaultActiveKey="0">

@@ -74,7 +74,7 @@ class DayWiseSummary extends React.Component {
             <span>
               <DateRange
                 getDateOnchange={this.getDateOnchange}
-                startDate={[this.state.startDate, this.state.endDate]}
+                dateRange={[this.state.startDate, this.state.endDate]}
               />
             </span>
             <DayWiseBarChart Confirmed={getFilterData.map(data=>{return [data.Confirmed,data.Date]})} />

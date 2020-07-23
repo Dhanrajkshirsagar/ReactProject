@@ -9,13 +9,14 @@ class DateRange extends React.Component {
     startDate: "",
   };
   handleChange(value) {
-    console.log(value)
+  
     this.setState({
-      endDate: value.selection.endDate,
+      endDate: new Date(value.selection.endDate).setHours(12),
       startDate: value.selection.startDate,
     },()=>{this.props.getDateOnchange(this.state)});
   }
   render() {
+   
     let timeObject = [
       {
         endDate: this.state.endDate,
@@ -24,14 +25,13 @@ class DateRange extends React.Component {
       },
     ];
     return (
-      <span style={{ display: 'flex',marginLeft:"800px"}}>
+      <span style={{ display: 'flex',marginLeft:"600px"}}>
       <DateRangePicker
         ranges={timeObject}
         onChange={(value) => this.handleChange(value)}
         showSelectionPreview={false}
         moveRangeOnFirstSelection={false}
         showDateDisplay={false}
-       
         months={1}
       />
       </span>
