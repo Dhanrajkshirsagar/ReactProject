@@ -8,7 +8,6 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 class ExportData extends React.Component{
     
     render(){
-        console.log(this.props)
         return(
             <div>
                 <ExcelFile>
