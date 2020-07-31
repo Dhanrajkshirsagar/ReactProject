@@ -25,3 +25,6 @@ code {
 .Loader{
   text-align: center;
 }
+.CovidCard{
+  display: flex;
+}

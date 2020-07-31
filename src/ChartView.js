@@ -16,31 +16,9 @@ class ChartView extends React.Component {
       ],
       datasets: [
         {
-          label:this.props.label,
-          data: [
-            this.props.covidData.TotalConfirmed,
-            this.props.covidData.NewConfirmed,
-            this.props.covidData.TotalDeaths,
-            this.props.covidData.NewDeaths,
-            this.props.covidData.TotalRecovered,
-            this.props.covidData.NewRecovered,
-          ],
-          backgroundColor: [
-            "rgba(255,99,132,0.6)",
-            "rgba(54,162,235,0.6)",
-            "rgba(255,206,86,0.6)",
-            "rgba(75,192,192,0.6)",
-            "rgba(153,102,255,0.6)",
-            "rgba(255,159,64,0.6)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
+          lable:this.props.lable,
+          backgroundColor: this.props.backgroundColor,
+          borderColor: this.props.borderColor,
           borderWidth: 1,
         },
       ],
@@ -49,7 +27,7 @@ class ChartView extends React.Component {
   render() {
    
     return (
-      <div className="pie" style={{display:"flex"}}  >
+      <div className="pie" >
         <Pie
           data={this.state.chartData}
           width={100}
@@ -57,7 +35,6 @@ class ChartView extends React.Component {
           options={{
             title: {
               display: true,
-              text: this.props.text,
               legend:{display:true,position:'bottom',align:"center"},
               labels: {
                 fontSize: 14,

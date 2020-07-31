@@ -5,7 +5,7 @@ class CovidCards extends React.Component {
     var covidData = this.props.covidData;
 
     return (
-      <div class="flex-container">
+      <div class="CovidCard">
         <div class="card" style={{ margin: "25px", width: "500px" }}>
           <div style={{ fontWeight: "bold" }} class="card-header">
             Global Covid Cases-- Todays)

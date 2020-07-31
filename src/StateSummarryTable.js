@@ -2,21 +2,21 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import ExportData from "./ExportData";
 
+
 class StateSummarryTable extends React.Component {
   state = { stateName: "" };
   render() {
     var StateData = this.props.StateData;
-
+    console.log(StateData)
     var filterStateData = StateData.filter((data) => {
       return (
-        data.state.toLowerCase().indexOf(this.state.stateName.toLowerCase()) !==
-        -1
+        data.state.toLowerCase().indexOf(this.state.stateName.toLowerCase()) !== -1
       );
     });
 
     return (
       <div>
-        <ExportData filterStateData={filterStateData}/>
+        <ExportData filterStateData={filterStateData} />
         <div style={{ margin: "10px" }} class="table" id="stateSummary">
           <Table className="center">
             <thead>

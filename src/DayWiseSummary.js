@@ -46,9 +46,9 @@ class DayWiseSummary extends React.Component {
     let { DayWiseData, Loaded } = this.state;
 
     let data = DayWiseData;
-    let getFilterData=[]
+    let getFilterData = [];
     if (data.length > 0) {
-       getFilterData = data.filter((filterData) => {
+      getFilterData = data.filter((filterData) => {
         return (
           filterData.Date >= this.state.startDate &&
           filterData.Date <= this.state.endDate
@@ -79,11 +79,26 @@ class DayWiseSummary extends React.Component {
                 dateRange={[this.state.startDate, this.state.endDate]}
               />
             </span>
-            <DayWiseBarChart
-              Confirmed={getFilterData.map((data) => {
-                return [data.Confirmed, data.Date];
-              })}
-            />
+            <div style={{display:"flex"}}>
+              <div>
+                <DayWiseBarChart
+                  name="Confirmed"
+                  title="Number of Confirmed Cases"
+                  Confirmed={getFilterData.map((data) => {
+                    return [data.Confirmed, data.Date];
+                  })}
+                />
+              </div>
+              <div style={{marginLeft:"550px"}}>
+                <DayWiseBarChart
+                  name="Recovered"
+                  title="Number of Recovered Cases"
+                  Confirmed={getFilterData.map((data) => {
+                    return [data.Recovered, data.Date];
+                  })}
+                />
+              </div>
+            </div>
           </div>
         </div>
         <div>
