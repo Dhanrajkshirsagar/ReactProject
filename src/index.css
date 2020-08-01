@@ -28,3 +28,6 @@ code {
 .CovidCard{
   display: flex;
 }
+.ulList{
+  margin: "10px";
+}

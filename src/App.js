@@ -6,6 +6,8 @@ import DayWiseSummary from "./DayWiseSummary";
 import { Image, Spinner, Tabs, Tab } from "react-bootstrap";
 // import ChartView from "./ChartView";
 import PieChartView from "./PieChartView";
+import Epass from './Epass';
+import {BrowserRouter} from 'react-router-dom'
 
 class App extends React.Component {
   state = {
@@ -115,7 +117,11 @@ class App extends React.Component {
             <Tab eventKey="profile" title="Day Wise">
               <DayWiseSummary />
             </Tab>
-            <Tab eventKey="contact" title="Contact" disabled></Tab>
+            <Tab eventKey="contact" title="E-Pass">
+              <BrowserRouter>
+                <Epass/>
+              </BrowserRouter>
+            </Tab>
           </Tabs>
         </div>
       );
