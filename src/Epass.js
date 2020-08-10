@@ -25,9 +25,8 @@ class Epass extends React.Component {
         <h4 style={{marginTop:"15px"}}>Apply for Travel E-Pass</h4>
         <div style={{ margin: "20px" }}>
           <Link onClick={redirectPage}>Click Here</Link>
-          
           <ul className="ulList">
-          <h5 style={{marginTop:"15px"}}>Government guidelines</h5>
+          <h5 style={{marginTop:"15px",backgroundColor:"LightGray"}}>Government guidelines</h5>
             {points.map((list) => (
                <li>{list}</li>
             ))}

@@ -2,27 +2,43 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import ExportData from "./ExportData";
 
-
 class StateSummarryTable extends React.Component {
-  state = { stateName: "" };
-  render() {
-    var StateData = this.props.StateData;
-    console.log(StateData)
-    var filterStateData = StateData.filter((data) => {
-      return (
-        data.state.toLowerCase().indexOf(this.state.stateName.toLowerCase()) !== -1
-      );
-    });
+  state = { stateName: "", filterData: this.props.StateData, counter: true };
 
+  filterStateData = (name) => {
+    let filterStateData = this.props.StateData.filter((data) => {
+      return data.state.toLowerCase().indexOf(name.toLowerCase()) !== -1;
+    });
+    this.setState({ filterData: filterStateData });
+  };
+
+  sortedData = () => {
+    let filterStateData;
+    if (this.state.counter === true) {
+      filterStateData = this.state.filterData.sort(
+        (a, b) => b.active - a.active
+      );
+      this.setState({counter:false})
+    } else {
+      filterStateData = this.state.filterData.sort(
+        (a, b) => a.active - b.active
+      );
+      this.setState({counter:true})
+    }
+    this.setState({ filterData: filterStateData});
+  };
+  render() {
     return (
       <div>
-        <ExportData filterStateData={filterStateData} />
+        <ExportData filterStateData={this.state.filterData} />
         <div style={{ margin: "10px" }} class="table" id="stateSummary">
           <Table className="center">
-            <thead>
+            <thead onClick={this.sortedData}>
               <th>Sr.No</th>
               <th>State Name</th>
-              <th>Total Active</th>
+              <th >Total Active
+              <button style={{marginLeft:"10px"}}  type="button" class="btn btn-outline-dark">Sort</button>
+              </th>
               <th>Total Recovered</th>
               <th>Total Deaths</th>
               <th>Total Confirmed</th>
@@ -35,15 +51,15 @@ class StateSummarryTable extends React.Component {
                     placeholder="Search State"
                     type="text"
                     onChange={(e) => {
-                      this.setState({ stateName: e.target.value });
+                      this.filterStateData(e.target.value);
                     }}
                   ></input>
                 </th>
               </tr>
-              {filterStateData.length === 0 ? (
+              {this.state.filterData.length === 0 ? (
                 <h3>No Data found</h3>
               ) : (
-                filterStateData.map((stateDataObj, index) => {
+                this.state.filterData.map((stateDataObj, index) => {
                   return (
                     <tr>
                       <th>{index + 1}</th>
